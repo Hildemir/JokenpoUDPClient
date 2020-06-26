@@ -12,9 +12,9 @@
 
 ```bash 
 # clone this repository (client) to your machine
-$ git clone https://github.com/Hildemir/ThreadingSO
+$ git clone https://github.com/Hildemir/JokenpoUDPClient
 # Then do the same with the server 
-$ git clone https://github.com/Hildemir/ThreadingSO
+$ git clone https://github.com/Hildemir/JokenpoUDPServer
 ```
 
 1. [Download Java](https://www.oracle.com/technetwork/pt/java/javase/downloads/index.html)
