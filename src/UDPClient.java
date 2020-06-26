@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
     public class UDPClient {
 
-
+    // [Constantes das cores]
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RESET = "\u001B[0m";
@@ -33,9 +33,10 @@ import java.util.logging.Logger;
 
             try {
                 asocket = new DatagramSocket();
-                //======================================================================
                 int escolha;
                 Scanner in = new Scanner(System.in);
+
+                // [Menu]
                 System.out.println(ANSI_BLUE + "======JOKENPO=======" + ANSI_RESET);
                 System.out.println(ANSI_BLUE + "O jogador que fizer 3 pontos primeiro ganha." + ANSI_RESET);
 
@@ -62,10 +63,10 @@ import java.util.logging.Logger;
                     System.out.println(ANSI_BLUE + "|" + ANSI_RESET + " 3. tesoura       " + ANSI_BLUE + "|" + ANSI_RESET);
                     System.out.println(ANSI_BLUE + "====================" + ANSI_RESET);
                     roundCounter++;
-//                System.out.println("Digite a jogada desejada: ");
-//                escolha = in.nextInt();
-                    String jogada;
+                    // [Fim do menu]
 
+                    // [Captando jogada do cliente]
+                    String jogada;
                     do {
                         System.out.println("Digite a jogada desejada: ");
                         System.out.println("Somente serão válidos valores entre 1 e 3.");
@@ -88,6 +89,7 @@ import java.util.logging.Logger;
                             jogada = "nada";
                             break;
                     }
+
                     // [Enviando jogada para o oponente]
                     byte[] m = jogada.getBytes();
                     InetAddress server = InetAddress.getLocalHost();
@@ -105,7 +107,7 @@ import java.util.logging.Logger;
                     asocket.receive(reply);
                     String strJogadaServidor = new String(buffer, 0, reply.getLength());
 
-
+                    // [Exibindo resultado por partida]
                     if (jogada.equals(strJogadaServidor)) {
                         System.out.println(ANSI_BLUE + "====================" + ANSI_RESET);
                         System.out.println("  Voce:     " + jogada);
@@ -155,6 +157,8 @@ import java.util.logging.Logger;
                         suaPontuacao++;
                         System.out.println(ANSI_BLUE + "====================" + ANSI_RESET);
                     }
+
+                    // [Exibindo resultado do jogo]
                     if(suaPontuacao == 3){
                         System.out.println(ANSI_GREEN + "  Parabens! Voce conseguiu os 3 pontos antes do seu oponente!" + ANSI_RESET);
                         break;
@@ -163,7 +167,6 @@ import java.util.logging.Logger;
                         break;
                     }
                 }while(suaPontuacao != 3 || pontuacaoOponente !=3);
-//System.out.println("Resposta: " + new String(reply.getData(),0,reply.getLength()));
             } catch (SocketException ex) {
                 Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnknownHostException ex) {
